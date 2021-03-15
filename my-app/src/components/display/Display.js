@@ -3,30 +3,18 @@ import Cellphone from '../cellphone/Cellphone'
 
 function Display(props) {
 
-    const testList = {
-        cellphoneArray: [
-            {
-                id: 1,
-                brand: 'Apple',
-                model: 'Iphone 5',
-                memory: '2',
-                releaseDate: '15/01/2015'
-            },
-            {
-                id: 2,
-                brand: 'Apple',
-                model: 'Iphone 6',
-                memory: '3',
-                releaseDate: '15/01/2016'
-            }
-        ]
-    }
-
     const tableBody = () => {
+        if (props.cellphoneList === 0) {
+            return
+        }
+
         let rows = []
-        testList.cellphoneArray.forEach(element => {
+        let list = props.cellphoneList.cellphoneArray;
+
+        list.forEach(element => {
             rows.push(<Cellphone  key={element.id} phone={element} />)
         })
+
         return <tbody>{rows}</tbody>
     }
 
