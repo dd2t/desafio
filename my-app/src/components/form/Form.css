@@ -1,14 +1,13 @@
 .add-phone-form {
-    width: 70%;
-    margin: auto;
-    margin-top: 10%;
-
+    padding: 10% 2rem 10% 2rem;
     border: 1px solid #000;
     border-radius: 0.1rem;
 }
 
-.add-phone-form > form {
-    margin: 10% 2rem 10% 2rem;
+form {
+    width: 70%;
+    margin: auto;
+    margin-top: 10%;
 }
 
 .form-title {

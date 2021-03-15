@@ -10,9 +10,11 @@ function Display(props) {
 
         let rows = []
         let list = props.cellphoneList.cellphoneArray;
+        let i = 1
 
         list.forEach(element => {
-            rows.push(<Cellphone  key={element.id} phone={element} />)
+            rows.push(<Cellphone  key={i} phone={element} />)
+            i++
         })
 
         return <tbody>{rows}</tbody>

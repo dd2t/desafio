@@ -9,12 +9,13 @@ import {
 } from "react-router-dom"
 
 function App() {
-  const [cellphoneList, setCellphones] = useState(0)
+  const [cellphoneList, setCellphoneList] = useState(0)
+
 
 
   useEffect(() => {
     fetch('/cellphone-list').then(res => res.json()).then(data => {
-      setCellphones(() => ({
+      setCellphoneList(() => ({
         cellphoneArray: data.cellphoneArray
       }));
     });

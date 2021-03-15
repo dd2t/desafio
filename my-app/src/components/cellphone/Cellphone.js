@@ -22,7 +22,7 @@ function Cellphone(props) {
         tds.push(<td key={'model'}>{props.phone.model}</td>)
         tds.push(<td key={'memory'}>{props.phone.memory}</td>)
         tds.push(<td key={'releaseDate'}>{props.phone.releaseDate}</td>)
-        tds.push(<td key={'Update'}><a href="/cellphone">Alterar</a></td>)
+        tds.push(<td key={'Update'}><a href="/cellphone" >Alterar</a></td>)
         tds.push(<td key={'Delete'}><a href="/cellphone">Excluir</a></td>)
 
         return <tr>{tds}</tr>
