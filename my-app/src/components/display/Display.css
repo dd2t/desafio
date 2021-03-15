@@ -1,0 +1,35 @@
+.display-box {
+    width: 80%;
+    margin: auto;
+    margin-top: 10%;
+    /* margin: 10% auto auto auto; */
+}
+
+/* Button */
+#new-phone-button {
+    margin-top: auto;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: auto;
+}
+
+/* Table */
+/* .phone-table {
+    border: 1px solid #000;
+    border-radius: 0.1rem;
+    padding: 0;
+}
+
+.phone-table > table {
+    margin: 0;
+    padding: 0;
+}
+
+.phone-table td:nth-child(even) {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.phone-table td:last-child {
+    border-right: none;
+} */

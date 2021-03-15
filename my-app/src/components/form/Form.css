@@ -1,0 +1,22 @@
+.add-phone-form {
+    width: 70%;
+    margin: auto;
+    margin-top: 10%;
+
+    border: 1px solid #000;
+    border-radius: 0.1rem;
+}
+
+.add-phone-form > form {
+    margin: 10% 2rem 10% 2rem;
+}
+
+.form-title {
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
+.form-buttons {
+    width: 70%;
+    margin: 1rem auto;
+}
