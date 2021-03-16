@@ -28,7 +28,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/"><Display cellphoneList={cellphoneList} /></Route>
-        <Route path="/cellphone"><Form /></Route>
+        <Route path="/cellphone"><Form cellphoneList={cellphoneList} /></Route>
       </Switch>
     </Router>
 

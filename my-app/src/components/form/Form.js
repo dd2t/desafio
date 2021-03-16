@@ -2,6 +2,29 @@ import './Form.css'
 
 function Form(props) {
 
+    let param = window.location.href
+        .replace('http://localhost:3000/cellphone?model=', '')
+        .replace('%20', ' ')
+    console.log(param)
+    
+    if (param !== 'http://localhost:3000/cellphone') {
+        let inputCamps = document.getElementsByName('input')
+        let list = props.cellphoneList.cellphoneArray
+        console.log(list)
+
+        if (list !== undefined){
+            list.forEach(element => {
+                if (element.model === param){
+                    inputCamps[0].value = element.brand
+                    inputCamps[1].value = element.model
+                    inputCamps[2].value = element.memory
+                    inputCamps[3].value = element.releaseDate
+                    console.log(element.releaseDate)
+                }
+            })
+        }
+    }
+
     const submitCellphone = (() => {
         let inputName = document.getElementsByName('input')
 

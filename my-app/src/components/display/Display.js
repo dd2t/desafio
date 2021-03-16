@@ -9,7 +9,7 @@ function Display(props) {
         }
 
         let rows = []
-        let list = props.cellphoneList.cellphoneArray;
+        let list = props.cellphoneList.cellphoneArray
         let i = 1
 
         list.forEach(element => {
