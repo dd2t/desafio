@@ -12,21 +12,35 @@ function Cellphone(props) {
     //     <td><a href="/temp">Excluir</a></td>
     // </tr>
 
+
+    const deleteCellphone = (() => {
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(props.phone)
+        };
+
+        fetch('/delete', requestOptions);
+        // const data = response.json();
+    })
+
+
     let cellphoneRow = () => {
         let tds = []
         // Object.keys(props.phone).forEach(key => {
         //     tds.push(<td>{props.phone[key]}</td>)
         // })
 
-        tds.push(<td key={'brand'}>{props.phone.brand}</td>)
-        tds.push(<td key={'model'}>{props.phone.model}</td>)
-        tds.push(<td key={'memory'}>{props.phone.memory}</td>)
-        tds.push(<td key={'releaseDate'}>{props.phone.releaseDate}</td>)
-        tds.push(<td key={'Update'}><a href={`/cellphone?model=${props.phone.model}`} >Alterar</a></td>)
-        tds.push(<td key={'Delete'}><a href="/cellphone">Excluir</a></td>)
+        tds.push(<td key="brand">{props.phone.brand}</td>)
+        tds.push(<td key="model">{props.phone.model}</td>)
+        tds.push(<td key="memory">{props.phone.memory}</td>)
+        tds.push(<td key="releaseDate">{props.phone.releaseDate}</td>)
+        tds.push(<td key="Update"><a href={`/cellphone?model=${props.phone.model}`} >Alterar</a></td>)
+        tds.push(<td key="Delete" onClick={deleteCellphone} ><a href="/">Excluir</a></td>)
 
         return <tr>{tds}</tr>
     }
+    
 
     return (
         <>

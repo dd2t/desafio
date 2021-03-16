@@ -31,9 +31,15 @@ def index():
     }
 
 
-@app.route('/delete/<int:id>')
-def delete(id):
-    return {'text': 'oops'}
+@app.route('/delete', methods=['DELETE'])
+def delete():
+    phone = request.get_json()
+    for i in phones:
+        if i['model'] == phone['model']:
+            phones.remove(phone)
+            phones[phones.index(i)] = phone
+            break
+    return redirect('/')
 
 
 @app.route('/update', methods=['GET', 'POST'])

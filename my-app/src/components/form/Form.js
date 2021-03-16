@@ -41,8 +41,6 @@ function Form(props) {
 
         const response = fetch('/update', requestOptions);
         // const data = response.json();
-
-        console.log('Do the thing')
     })
 
     return (
