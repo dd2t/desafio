@@ -8,19 +8,19 @@ phones = [
         'brand': 'Apple',
         'model': 'Iphone 5',
         'memory': '2',
-        'releaseDate': '15-01-2015'
+        'releaseDate': '2021-04-03'
     },
     {
         'brand': 'Pineapple',
         'model': 'Honeycomb 3',
         'memory': '42',
-        'releaseDate': '21-07-2016'
+        'releaseDate': '2021-12-21'
     },
     {
         'brand': 'Mapple',
         'model': 'Melon 7',
         'memory': '88',
-        'releaseDate': '16-03-2021'
+        'releaseDate': '2042-01-11'
     }
 ]
 
@@ -38,8 +38,16 @@ def delete(id):
 
 @app.route('/update', methods=['GET', 'POST'])
 def update():
+    editing = False
     if request.method == 'POST':
-        phones.append(request.get_json())
+        phone = request.get_json()
+        for i in phones:
+            if i['model'] == phone['model']:
+                phones[phones.index(i)] = phone
+                editing = True
+                break
+        if not editing:
+            phones.append(phone)
     return redirect('/')
 
 if __name__ == '__main__':
