@@ -1,2 +1,2 @@
-# desafio
-Desafio usando React, Redux no front-end e back-end em Python com Flask
+# Desafio
+Montar um CRUD usando a stack de React e Redux no front-end e o back-end em Python com Flask.\
