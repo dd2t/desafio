@@ -1,7 +1,7 @@
 import { setToEdit } from '../../store/index'
-function Cellphone(props, { dispatch }) {
+function Cellphone(props) {
 
-    // Model
+    // Modelo
     // <tr>
     //     <td>Apple</td>
     //     <td>Iphone 5</td>
@@ -12,12 +12,6 @@ function Cellphone(props, { dispatch }) {
     // </tr>
 
     const passToEdit = () => {
-        // dispatch(() => {
-        //     return {
-        //         type: 'SET_TO_EDIT',
-        //         toEdit: props.phone
-        //     }
-        // })
         setToEdit(props.phone)
     }
 

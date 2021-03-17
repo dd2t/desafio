@@ -1,7 +1,6 @@
 import './Form.css'
-import { connect } from 'react-redux'
 
-function Form(props, {toEdit}) {
+function Form(props) {
     
     if (props.cellphoneList === undefined) {
         return
@@ -21,7 +20,6 @@ function Form(props, {toEdit}) {
                     inputCamps[1].value = element.model
                     inputCamps[2].value = element.memory
                     inputCamps[3].value = element.releaseDate
-                    param = 'http://localhost:3000/cellphone'
                 }
             })
         }
@@ -83,4 +81,4 @@ function Form(props, {toEdit}) {
     )
 }
 
-export default connect((state) => ({toEdit: state.toEdit}))(Form);
+export default Form;
