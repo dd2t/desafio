@@ -1,51 +1,52 @@
-import './Form.css'
-import { connect } from 'react-redux'
+import React from 'react'
+class Formm extends React.Component {
 
-function Form(props, {toEdit}) {
+    componentDidMount() {
+        if (this.props.cellphoneList === []) {
+            return
+        }
+        let param = window.location.href
+            .replace('http://localhost:3000/cellphone?model=', '')
+            .replace('%20', ' ')
+            
+        if (param !== 'http://localhost:3000/cellphone') {
+            let inputCamps = document.getElementsByName('input')
+            let list = this.props.cellphoneList
     
-    if (props.cellphoneList === undefined) {
-        return
-    }
-    let param = window.location.href
-        .replace('http://localhost:3000/cellphone?model=', '')
-        .replace('%20', ' ')
-        
-    if (param !== 'http://localhost:3000/cellphone') {
-        let inputCamps = document.getElementsByName('input')
-        let list = props.cellphoneList
-
-        if (list !== undefined){
-            list.forEach(element => {
-                if (element.model === param){
-                    inputCamps[0].value = element.brand
-                    inputCamps[1].value = element.model
-                    inputCamps[2].value = element.memory
-                    inputCamps[3].value = element.releaseDate
-                    param = 'http://localhost:3000/cellphone'
-                }
-            })
+            if (list !== undefined){
+                list.forEach(element => {
+                    if (element.model === param){
+                        inputCamps[0].value = element.brand
+                        inputCamps[1].value = element.model
+                        inputCamps[2].value = element.memory
+                        inputCamps[3].value = element.releaseDate
+                    }
+                })
+            }
         }
     }
 
-    const submitCellphone = (() => {
-        let inputName = document.getElementsByName('input')
+    render() {
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                brand: inputName[0].value,
-                model: inputName[1].value,
-                memory: inputName[2].value,
-                releaseDate: inputName[3].value
-            })
-        };
+        const submitCellphone = () => {
+            let inputName = document.getElementsByName('input')
 
-        fetch('/update', requestOptions);
-    })
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    brand: inputName[0].value,
+                    model: inputName[1].value,
+                    memory: inputName[2].value,
+                    releaseDate: inputName[3].value
+                })
+            };
 
-    return (
-        <div className="form-box container">
+            fetch('/update', requestOptions);
+        }
+
+        return (
+            <div className="form-box container">
             {/* Marca, modelo, memória, lançamento */}
             <form>
                 <div className="add-phone-form">
@@ -80,7 +81,7 @@ function Form(props, {toEdit}) {
                 <a className="btn btn-primary" href="/" role="button" onClick={submitCellphone} >Salvar</a>
             </div>
         </div>
-    )
+        )
+    }
 }
-
-export default connect((state) => ({toEdit: state.toEdit}))(Form);
+export default Formm;

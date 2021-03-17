@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 
 # Database
-
 cluster = pymongo.MongoClient(f"mongodb+srv://dd2t:{passwd.pwd()}@cluster0.jy3il.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = cluster["desafio"]
 collection = db["cellphone"]
@@ -37,17 +36,6 @@ collection = db["cellphone"]
 #     }
 # ]
 
-# Create
-# collection.insert_one(phones[2])
-# collection.insert_many(startDB)
-# Read
-# collection.find_one({'_id': var})
-# collection.find()
-
-
-
-
-
 # Routes
 @app.route('/cellphone-list', methods=['GET'])
 def index():
@@ -63,11 +51,6 @@ def index():
 @app.route('/delete', methods=['DELETE'])
 def delete():
     phone = request.get_json()
-    # for i in phones:
-    #     if i['model'] == phone['model']:
-    #         phones.remove(phone)
-    #         phones[phones.index(i)] = phone
-    #         break
     collection.delete_one({'model': phone['model']})
     return redirect('/')
 
@@ -82,22 +65,16 @@ def newPhone(element, id):
 
 @app.route('/update', methods=['GET', 'POST'])
 def update():
-    # editing = False
     if request.method == 'POST':
         phone = request.get_json()
-        # for i in phones:
-        #     if i['model'] == phone['model']:
-        #         phones[phones.index(i)] = phone
-        #         editing = True
-        #         break
-        # if not editing:
-        #     phones.append(phone)
-        found = collection.find_one({'model': phone['model']})
-        if None == found:
-            found = collection.find_one({'$query': {}, '$orderby':{'_id':-1}})
-            collection.insert_one(newPhone(phone, found['_id']+1))
+        oldPhone = collection.find_one({'model': phone['model']})
+
+        if None == oldPhone:
+            oldPhone = collection.find_one({'$query': {}, '$orderby':{'_id':-1}})
+            collection.insert_one(newPhone(phone, oldPhone['_id']+1))
         else:
-            collection.replace_one(found, phone)
+            collection.replace_one(oldPhone, phone)
+
     return redirect('/')
 
 if __name__ == '__main__':

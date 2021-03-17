@@ -1,6 +1,5 @@
-import './Cellphone.css';
-
-function Cellphone(props) {
+import { setToEdit } from '../../store/index'
+function Cellphone(props, { dispatch }) {
 
     // Model
     // <tr>
@@ -12,6 +11,15 @@ function Cellphone(props) {
     //     <td><a href="/temp">Excluir</a></td>
     // </tr>
 
+    const passToEdit = () => {
+        // dispatch(() => {
+        //     return {
+        //         type: 'SET_TO_EDIT',
+        //         toEdit: props.phone
+        //     }
+        // })
+        setToEdit(props.phone)
+    }
 
     const deleteCellphone = (() => {
         const requestOptions = {
@@ -21,7 +29,6 @@ function Cellphone(props) {
         };
 
         fetch('/delete', requestOptions);
-        // const data = response.json();
     })
 
 
@@ -35,7 +42,7 @@ function Cellphone(props) {
         tds.push(<td key="model">{props.phone.model}</td>)
         tds.push(<td key="memory">{props.phone.memory}</td>)
         tds.push(<td key="releaseDate">{props.phone.releaseDate}</td>)
-        tds.push(<td key="Update"><a href={`/cellphone?model=${props.phone.model}`} >Alterar</a></td>)
+        tds.push(<td key="Update" onClick={passToEdit} ><a href={`/cellphone?model=${props.phone.model}`} >Alterar</a></td>)
         tds.push(<td key="Delete" onClick={deleteCellphone} ><a href="/">Excluir</a></td>)
 
         return <tr>{tds}</tr>
