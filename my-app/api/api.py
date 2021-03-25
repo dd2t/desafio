@@ -3,7 +3,7 @@ import pymongo
 from pymongo import MongoClient
 import passwd
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../build', static_url_path='/')
 
 
 # Database
@@ -37,8 +37,16 @@ collection = db["cellphone"]
 # ]
 
 # Routes
-@app.route('/cellphone-list', methods=['GET'])
+@app.route('/')
 def index():
+    return app.send_static_file('index.html')
+
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
+
+@app.route('/cellphone-list', methods=['GET'])
+def sendList():
     phones = []
     for doc in collection.find():
         phones.append(doc)
@@ -78,4 +86,4 @@ def update():
     return redirect('/')
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT',80))
