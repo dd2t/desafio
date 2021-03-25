@@ -38,7 +38,7 @@ collection = db["cellphone"]
 # ]
 
 # Routes
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
     return app.send_static_file('index.html')
 
