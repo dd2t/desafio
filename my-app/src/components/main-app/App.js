@@ -31,7 +31,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/"><Display cellphoneList={cellphoneArray} /></Route>
-            <Route path="/cellphone"><Form cellphoneList={cellphoneArray} /></Route>
+            <Route path="/cellphone"><Form /></Route>
           </Switch>
         </Router>
       </div>

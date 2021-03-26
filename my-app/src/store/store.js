@@ -15,11 +15,6 @@ function reducer(state = initialState, action) {
     return state
 }
     
-
 const store = createStore(reducer)
-
-export const testState = () =>{
-    console.log('From store', store.getState())
-}
 
 export default store

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Cellphone(props) {
 
-    // Modelo
+    // Modelo da linha da tabela
     // <tr>
     //     <td>Apple</td>
     //     <td>Iphone 5</td>
@@ -37,6 +37,7 @@ function Cellphone(props) {
 
     let cellphoneRow = () => {
         let tds = []
+
         // Object.keys(props.phone).forEach(key => {
         //     tds.push(<td>{props.phone[key]}</td>)
         // })
@@ -45,7 +46,6 @@ function Cellphone(props) {
         tds.push(<td key="model">{props.phone.model}</td>)
         tds.push(<td key="memory">{props.phone.memory}</td>)
         tds.push(<td key="releaseDate">{props.phone.releaseDate}</td>)
-        // `/cellphone?model=${props.phone.model}`
         tds.push(<td key="Update" onClick={elementToEdit} ><Link to="/cellphone" >Alterar</Link></td>)
         tds.push(<td key="Delete" onClick={deleteCellphone} ><a href="/">Excluir</a></td>)
 
@@ -53,6 +53,7 @@ function Cellphone(props) {
     }
     
 
+    
     return (
         <>
             {cellphoneRow()}
