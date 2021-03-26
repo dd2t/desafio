@@ -7,7 +7,6 @@ const initialState = {
 
 function reducer(state = initialState, action) {
     if (action.type === 'SET_TO_EDIT') {
-        console.log('action toEdit', action.toEdit)
         return { ...state, toEdit: action.toEdit }
     }
     if (action.type === 'SET_CELLPHONE_ARRAY') {
@@ -19,9 +18,8 @@ function reducer(state = initialState, action) {
 
 const store = createStore(reducer)
 
-export const setToEdit = (element) =>{
-    store.dispatch({type: 'SET_TO_EDIT', toEdit: element})
-    console.log(store.getState().toEdit)
+export const testState = () =>{
+    console.log('From store', store.getState())
 }
 
 export default store

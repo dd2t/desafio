@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react'
-import './App.css';
 import Display from '../display/Display'
 import Form from '../form/Form'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom"
 
-function App({ cellphoneArray, dispatch }) {
+function App() {
+
+  const cellphoneArray = useSelector(state => state.cellphoneArray)
+  const dispatch = useDispatch()
 
   const setCellphoneArray = (arr) => {
     return {
@@ -36,4 +38,4 @@ function App({ cellphoneArray, dispatch }) {
   );
 }
 
-export default connect(state => ({ cellphoneArray: state.cellphoneArray }))(App);
+export default App;

@@ -1,4 +1,6 @@
-import { setToEdit } from '../../store/index'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 function Cellphone(props) {
 
     // Modelo
@@ -11,8 +13,15 @@ function Cellphone(props) {
     //     <td><a href="/temp">Excluir</a></td>
     // </tr>
 
-    const passToEdit = () => {
-        setToEdit(props.phone)
+    const dispatch = useDispatch()
+    const actionToEdit = (element) => {
+        return {
+            type: 'SET_TO_EDIT',
+            toEdit: element,
+        }
+    }
+    const elementToEdit = () => {
+        dispatch(actionToEdit(props.phone))
     }
 
     const deleteCellphone = (() => {
@@ -36,7 +45,8 @@ function Cellphone(props) {
         tds.push(<td key="model">{props.phone.model}</td>)
         tds.push(<td key="memory">{props.phone.memory}</td>)
         tds.push(<td key="releaseDate">{props.phone.releaseDate}</td>)
-        tds.push(<td key="Update" onClick={passToEdit} ><a href={`/cellphone?model=${props.phone.model}`} >Alterar</a></td>)
+        // `/cellphone?model=${props.phone.model}`
+        tds.push(<td key="Update" onClick={elementToEdit} ><Link to="/cellphone" >Alterar</Link></td>)
         tds.push(<td key="Delete" onClick={deleteCellphone} ><a href="/">Excluir</a></td>)
 
         return <tr>{tds}</tr>

@@ -1,29 +1,54 @@
 import './Form.css'
+import { useSelector } from 'react-redux'
+import { testState } from '../../store/store'
+import { useEffect } from 'react'
 
 function Form(props) {
-    
-    if (props.cellphoneList === undefined) {
-        return
-    }
-    let param = window.location.href
-        .replace('http://localhost:3000/cellphone?model=', '')
-        .replace('%20', ' ')
-        
-    if (param !== 'http://localhost:3000/cellphone') {
-        let inputCamps = document.getElementsByName('input')
-        let list = props.cellphoneList
 
-        if (list !== undefined){
-            list.forEach(element => {
-                if (element.model === param){
-                    inputCamps[0].value = element.brand
-                    inputCamps[1].value = element.model
-                    inputCamps[2].value = element.memory
-                    inputCamps[3].value = element.releaseDate
-                }
-            })
+    const phoneToEdit = useSelector(state => state.toEdit)
+    // console.log(phoneToEdit)
+    // testState()  Os dados não estão no estado Redux
+
+    
+    // if (props.cellphoneList === undefined) {
+    //     return
+    // }
+    // let param = window.location.href
+    //     .replace('http://localhost:3000/cellphone?model=', '')
+    //     .replace('%20', ' ')
+        
+    // if (param !== 'http://localhost:3000/cellphone') {
+    //     let inputCamps = document.getElementsByName('input')
+    //     let list = props.cellphoneList
+
+    //     if (list !== undefined){
+    //         list.forEach(element => {
+    //             if (element.model === param){
+    //                 inputCamps[0].value = element.brand
+    //                 inputCamps[1].value = element.model
+    //                 inputCamps[2].value = element.memory
+    //                 inputCamps[3].value = element.releaseDate
+    //             }
+    //         })
+    //     }
+    // }
+
+    const fillTextFields = () => {
+        if (phoneToEdit.model == null) {
+            return
         }
+
+        let inputCamps = document.getElementsByName('input')
+        inputCamps[0].value = phoneToEdit.brand
+        inputCamps[1].value = phoneToEdit.model
+        inputCamps[2].value = phoneToEdit.memory
+        inputCamps[3].value = phoneToEdit.releaseDate
     }
+
+    useEffect(() => {
+        fillTextFields()
+    })
+
 
     const submitCellphone = (() => {
         let inputName = document.getElementsByName('input')
@@ -38,7 +63,7 @@ function Form(props) {
                 releaseDate: inputName[3].value
             })
         };
-
+        
         fetch('/api/update', requestOptions);
     })
 
