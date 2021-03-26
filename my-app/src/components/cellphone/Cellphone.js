@@ -22,7 +22,7 @@ function Cellphone(props) {
             body: JSON.stringify(props.phone)
         };
 
-        fetch('/delete', requestOptions);
+        fetch('/api/delete', requestOptions);
     })
 
 

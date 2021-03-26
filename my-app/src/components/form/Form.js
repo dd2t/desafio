@@ -39,7 +39,7 @@ function Form(props) {
             })
         };
 
-        fetch('/update', requestOptions);
+        fetch('/api/update', requestOptions);
     })
 
     return (

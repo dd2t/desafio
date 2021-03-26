@@ -19,7 +19,7 @@ function App({ cellphoneArray, dispatch }) {
 }
 
   useEffect(() => {
-    fetch('/cellphone-list').then(res => res.json()).then(data => {
+    fetch('/api/cellphone-list').then(res => res.json()).then(data => {
       dispatch(setCellphoneArray(data.cellphoneArray))
     })
   }, [])

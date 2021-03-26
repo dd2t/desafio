@@ -1,10 +1,9 @@
 from flask import Flask, render_template, url_for, request, redirect
 import pymongo
 from pymongo import MongoClient
-# import passwd
 import os
 
-app = Flask(__name__, static_folder='../build', static_url_path='/')
+app = Flask(__name__, static_folder='./build', static_url_path='/')
 
 
 # Database
@@ -46,8 +45,8 @@ def index():
 def not_found(e):
     return app.send_static_file('index.html')
 
-@app.route('/cellphone-list', methods=['GET'])
-def sendList():
+@app.route('/api/cellphone-list', methods=['GET'])
+def send():
     phones = []
     for doc in collection.find():
         phones.append(doc)
@@ -57,7 +56,7 @@ def sendList():
     }
 
 
-@app.route('/delete', methods=['DELETE'])
+@app.route('/api/delete', methods=['DELETE'])
 def delete():
     phone = request.get_json()
     collection.delete_one({'model': phone['model']})
@@ -72,7 +71,7 @@ def newPhone(element, id):
         'releaseDate': element['releaseDate']
     }
 
-@app.route('/update', methods=['GET', 'POST'])
+@app.route('/api/update', methods=['GET', 'POST'])
 def update():
     if request.method == 'POST':
         phone = request.get_json()
