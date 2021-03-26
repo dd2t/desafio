@@ -5,13 +5,12 @@ import os
 
 app = Flask(__name__, static_folder='./build', static_url_path='/')
 
-
 # Database
 cluster = pymongo.MongoClient(f"mongodb+srv://dd2t:1234@cluster0.jy3il.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = cluster["desafio"]
 collection = db["cellphone"]
 
-
+# Database Model
 # startDB = [
 #     {
 #         '_id': 0,
@@ -36,14 +35,18 @@ collection = db["cellphone"]
 #     }
 # ]
 
+
+
 # Routes
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
 
+
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
 
 @app.route('/api/cellphone-list', methods=['GET'])
 def send():
@@ -62,6 +65,7 @@ def delete():
     collection.delete_one({'model': phone['model']})
     return redirect('/')
 
+
 def newPhone(element, id):
     return {
         '_id': id,
@@ -70,6 +74,7 @@ def newPhone(element, id):
         'memory': element['memory'],
         'releaseDate': element['releaseDate']
     }
+
 
 @app.route('/api/update', methods=['GET', 'POST'])
 def update():
@@ -87,4 +92,3 @@ def update():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=os.environ.get('PORT',80))
-    # app.run(debug=True)
