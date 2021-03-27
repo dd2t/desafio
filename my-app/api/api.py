@@ -2,11 +2,12 @@ from flask import Flask, render_template, url_for, request, redirect
 import pymongo
 from pymongo import MongoClient
 import os
+from password import passwd
 
 app = Flask(__name__, static_folder='./build', static_url_path='/')
 
 # Database
-cluster = pymongo.MongoClient(f"mongodb+srv://dd2t:1234@cluster0.jy3il.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+cluster = pymongo.MongoClient(passwd())
 db = cluster["desafio"]
 collection = db["cellphone"]
 
@@ -84,7 +85,10 @@ def update():
 
         if None == oldPhone:
             oldPhone = collection.find_one({'$query': {}, '$orderby':{'_id':-1}})
-            collection.insert_one(newPhone(phone, oldPhone['_id']+1))
+            if oldPhone != None:
+                collection.insert_one(newPhone(phone, oldPhone['_id']+1))
+            else:
+                collection.insert_one(newPhone(phone, 0))
         else:
             collection.replace_one(oldPhone, phone)
 
