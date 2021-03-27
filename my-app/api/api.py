@@ -59,7 +59,7 @@ def send():
     }
 
 
-@app.route('/api/delete', methods=['DELETE'])
+@app.route('/api/delete', methods=['DELETE', 'POST'])
 def delete():
     phone = request.get_json()
     collection.delete_one({'model': phone['model']})

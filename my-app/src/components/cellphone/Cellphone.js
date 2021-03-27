@@ -20,18 +20,22 @@ function Cellphone(props) {
             toEdit: element,
         }
     }
+
     const elementToEdit = () => {
         dispatch(actionToEdit(props.phone))
     }
 
-    const deleteCellphone = (() => {
+     const deleteCellphone =  (() => {
         const requestOptions = {
-            method: 'DELETE',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(props.phone)
         };
 
-        fetch('/api/delete', requestOptions);
+        async function apiDelete() {
+            await fetch('/api/delete', requestOptions);
+        }
+        apiDelete()
     })
 
 
@@ -47,12 +51,11 @@ function Cellphone(props) {
         tds.push(<td key="memory">{props.phone.memory}</td>)
         tds.push(<td key="releaseDate">{props.phone.releaseDate}</td>)
         tds.push(<td key="Update" onClick={elementToEdit} ><Link to="/cellphone" >Alterar</Link></td>)
-        tds.push(<td key="Delete" onClick={deleteCellphone} ><a href="/">Excluir</a></td>)
+        tds.push(<td key="Delete" onClick={deleteCellphone} ><Link to="/">Excluir</Link></td>)
 
         return <tr>{tds}</tr>
     }
     
-
     
     return (
         <>

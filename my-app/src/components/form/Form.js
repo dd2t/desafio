@@ -1,27 +1,24 @@
 import './Form.css'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 function Form() {
 
     const phoneToEdit = useSelector(state => state.toEdit)
 
     const fillTextFields = () => {
-        if (phoneToEdit.model == null) {
-            return
+        if (phoneToEdit.model != null) {
+            let inputCamps = document.getElementsByName('input')
+            inputCamps[0].value = phoneToEdit.brand
+            inputCamps[1].value = phoneToEdit.model
+            inputCamps[2].value = phoneToEdit.memory
+            inputCamps[3].value = phoneToEdit.releaseDate
         }
-
-        let inputCamps = document.getElementsByName('input')
-        inputCamps[0].value = phoneToEdit.brand
-        inputCamps[1].value = phoneToEdit.model
-        inputCamps[2].value = phoneToEdit.memory
-        inputCamps[3].value = phoneToEdit.releaseDate
     }
-
     useEffect(() => {
         fillTextFields()
     })
-
 
     const submitCellphone = (() => {
         let inputName = document.getElementsByName('input')
@@ -35,9 +32,11 @@ function Form() {
                 memory: inputName[2].value,
                 releaseDate: inputName[3].value
             })
-        };
-        
-        fetch('/api/update', requestOptions);
+        }
+        async function submit() {
+            await fetch('/api/update', requestOptions)
+        }
+        submit()
     })
 
     return (
@@ -73,10 +72,10 @@ function Form() {
 
             <div className="form-buttons d-flex justify-content-evenly">
                 <a className="btn btn-danger" href="/" role="button">Cancelar</a>
-                <a className="btn btn-primary" href="/" role="button" onClick={submitCellphone} >Salvar</a>
+                <Link className="btn btn-primary" to="/" role="button" onClick={submitCellphone} >Salvar</Link>
             </div>
         </div>
     )
 }
 
-export default Form;
+export default Form
